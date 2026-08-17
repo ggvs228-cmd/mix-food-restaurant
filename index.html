@@ -292,6 +292,10 @@
         <span class="ic">🕐</span>
         <div><strong data-i18n="book.hoursLabel">Horario</strong><span data-i18n="book.hours">Todos los días, desde las 12:00h</span></div>
       </div>
+      <div class="info-line">
+        <span class="ic">🏠</span>
+        <div><strong data-i18n="book.secondLabel">Segundo local</strong><span>Carrer de Santa Rosalia, 42, Barcelona</span></div>
+      </div>
     </div>
 
     <form class="reserve" id="reserveForm">
@@ -353,6 +357,8 @@
     <a href="tel:+34600045517">📞 +34 600 04 55 17</a>
     <a href="https://www.instagram.com/mixfoodrestaurant/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://wa.me/34600045517" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://www.tripadvisor.es/Restaurant_Review-g187497-d32827899-Reviews-Mix_Food_Restaurant-Barcelona_Catalonia.html" target="_blank" rel="noopener">Tripadvisor</a>
+    <a href="https://g.page/r/CSf-1GhRf_6FEAE/review" target="_blank" rel="noopener" data-i18n="footer.review">Danos tu opinión</a>
   </div>
   <div class="demo-note" data-i18n="footer.demo">Esta es una versión de demostración de la web, creada como propuesta de diseño y sin conexión a un sistema de reservas real.</div>
 </footer>
@@ -452,12 +458,13 @@ const i18n = {
     "menu.note":"Carta y precios sujetos a cambios de temporada — el equipo en sala confirma siempre la versión vigente.",
     "book.kicker":"Te guardamos sitio","book.title":"Reserva tu mesa",
     "book.desc":"Rellena el formulario y te confirmamos por WhatsApp o llamada. Para grupos grandes, mejor llámanos directamente.",
-    "book.addrLabel":"Dirección","book.phoneLabel":"Teléfono / WhatsApp","book.hoursLabel":"Horario","book.hours":"Todos los días, desde las 12:00h",
+    "book.addrLabel":"Dirección","book.phoneLabel":"Teléfono / WhatsApp","book.hoursLabel":"Horario","book.hours":"Todos los días, desde las 12:00h","book.secondLabel":"Segundo local",
     "form.name":"Nombre","form.namePh":"Tu nombre","form.phone":"Teléfono","form.date":"Fecha","form.time":"Hora","form.timeSelect":"Elige una hora",
     "form.guests":"Comensales","form.g1":"1 persona","form.g2":"2 personas","form.g3":"3 personas","form.g4":"4 personas","form.g5":"5 personas","form.g6":"6+ personas",
     "form.notes":"Nota (opcional)","form.notesPh":"Alergias, celebración...","form.submit":"Confirmar reserva",
     "form.confirm":(n,d,t)=>`Gracias, ${n}. Reserva de prueba registrada para el ${d} a las ${t}. (Demo: en la versión final esto se enviaría por WhatsApp/email al restaurante.)`,
-    "footer.demo":"Esta es una versión de demostración de la web, creada como propuesta de diseño y sin conexión a un sistema de reservas real."
+    "footer.demo":"Esta es una versión de demostración de la web, creada como propuesta de diseño y sin conexión a un sistema de reservas real.",
+    "footer.review":"Danos tu opinión"
   },
   ca:{
     "nav.inicio":"Inici","nav.nosotros":"Nosaltres","nav.carta":"Carta","nav.reservas":"Reserves","nav.contacto":"Contacte",
@@ -474,12 +481,13 @@ const i18n = {
     "menu.note":"Carta i preus subjectes a canvis de temporada — l'equip a sala confirma sempre la versió vigent.",
     "book.kicker":"Et guardem lloc","book.title":"Reserva la teva taula",
     "book.desc":"Omple el formulari i et confirmem per WhatsApp o trucada. Per a grups grans, millor truca'ns directament.",
-    "book.addrLabel":"Adreça","book.phoneLabel":"Telèfon / WhatsApp","book.hoursLabel":"Horari","book.hours":"Tots els dies, des de les 12:00h",
+    "book.addrLabel":"Adreça","book.phoneLabel":"Telèfon / WhatsApp","book.hoursLabel":"Horari","book.hours":"Tots els dies, des de les 12:00h","book.secondLabel":"Segon local",
     "form.name":"Nom","form.namePh":"El teu nom","form.phone":"Telèfon","form.date":"Data","form.time":"Hora","form.timeSelect":"Tria una hora",
     "form.guests":"Comensals","form.g1":"1 persona","form.g2":"2 persones","form.g3":"3 persones","form.g4":"4 persones","form.g5":"5 persones","form.g6":"6+ persones",
     "form.notes":"Nota (opcional)","form.notesPh":"Al·lèrgies, celebració...","form.submit":"Confirmar reserva",
     "form.confirm":(n,d,t)=>`Gràcies, ${n}. Reserva de prova registrada per al ${d} a les ${t}. (Demo: a la versió final això s'enviaria per WhatsApp/email al restaurant.)`,
-    "footer.demo":"Aquesta és una versió de demostració de la web, creada com a proposta de disseny i sense connexió a un sistema de reserves real."
+    "footer.demo":"Aquesta és una versió de demostració de la web, creada com a proposta de disseny i sense connexió a un sistema de reserves real.",
+    "footer.review":"Deixa'ns la teva opinió"
   },
   en:{
     "nav.inicio":"Home","nav.nosotros":"About","nav.carta":"Menu","nav.reservas":"Booking","nav.contacto":"Contact",
@@ -496,12 +504,13 @@ const i18n = {
     "menu.note":"Menu and prices may change by season — the team on the floor always confirms the current version.",
     "book.kicker":"We'll save you a seat","book.title":"Book your table",
     "book.desc":"Fill in the form and we'll confirm by WhatsApp or call. For larger groups, it's best to call us directly.",
-    "book.addrLabel":"Address","book.phoneLabel":"Phone / WhatsApp","book.hoursLabel":"Hours","book.hours":"Open every day, from 12:00pm",
+    "book.addrLabel":"Address","book.phoneLabel":"Phone / WhatsApp","book.hoursLabel":"Hours","book.hours":"Open every day, from 12:00pm","book.secondLabel":"Second location",
     "form.name":"Name","form.namePh":"Your name","form.phone":"Phone","form.date":"Date","form.time":"Time","form.timeSelect":"Choose a time",
     "form.guests":"Guests","form.g1":"1 person","form.g2":"2 people","form.g3":"3 people","form.g4":"4 people","form.g5":"5 people","form.g6":"6+ people",
     "form.notes":"Note (optional)","form.notesPh":"Allergies, celebration...","form.submit":"Confirm booking",
     "form.confirm":(n,d,t)=>`Thanks, ${n}. Test booking recorded for ${d} at ${t}. (Demo: in the final version this would be sent by WhatsApp/email to the restaurant.)`,
-    "footer.demo":"This is a demo version of the website, built as a design proposal and not connected to a real booking system."
+    "footer.demo":"This is a demo version of the website, built as a design proposal and not connected to a real booking system.",
+    "footer.review":"Leave us a review"
   }
 };
 
