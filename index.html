@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mix Food Restaurant — Carrer de Varsòvia, 26, Barcelona</title>
+<style>
+  :root{
+    --red:#b5272c;
+    --red-dark:#8c1e22;
+    --teal-dark:#0e3d3c;
+    --teal:#155452;
+    --gold:#cf9b3e;
+    --cream:#faf2e4;
+    --cream-2:#f2e6d0;
+    --ink:#20281f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Georgia', 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  h1,h2,h3,.nav-brand{font-family:'Trebuchet MS', 'Segoe UI', sans-serif;}
+
+  /* NAV */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(14,61,60,0.94);
+    backdrop-filter:blur(6px);
+  }
+  nav{
+    max-width:1150px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; gap:20px;
+  }
+  .nav-brand{color:var(--cream); font-size:1.4rem; font-weight:700; letter-spacing:.5px; display:flex; align-items:center; gap:8px; white-space:nowrap;}
+  .nav-brand span{color:var(--red);}
+  .nav-links{display:flex; gap:26px; list-style:none; align-items:center;}
+  .nav-links a{color:var(--cream-2); text-decoration:none; font-size:.95rem; font-weight:600; letter-spacing:.3px; transition:color .2s;}
+  .nav-links a:hover{color:var(--red);}
+  .lang-switch{display:flex; gap:4px; margin-left:6px;}
+  .lang-btn{
+    background:none; border:1px solid rgba(250,242,228,.35); color:var(--cream-2);
+    font-size:.72rem; font-weight:700; padding:4px 8px; border-radius:3px; cursor:pointer;
+    font-family:'Trebuchet MS',sans-serif; letter-spacing:.5px;
+  }
+  .lang-btn.active, .lang-btn:hover{background:var(--red); border-color:var(--red); color:#fff;}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .nav-toggle span{width:24px; height:2px; background:var(--cream);}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    position:relative;
+    background:
+      linear-gradient(120deg, rgba(14,61,60,0.84), rgba(14,61,60,0.55) 55%, rgba(181,39,44,0.4)),
+      url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    color:var(--cream);
+    text-align:center;
+    padding:120px 20px 60px;
+  }
+  .hero-inner{max-width:720px; margin:0 auto;}
+  .hero small{letter-spacing:4px; text-transform:uppercase; color:var(--gold); font-weight:600; font-size:.85rem;}
+  .hero h1{font-size:3.1rem; margin:14px 0 18px; line-height:1.15;}
+  .hero p{font-size:1.15rem; color:var(--cream-2); max-width:560px; margin:0 auto 30px;}
+  .btn{
+    display:inline-block; padding:14px 32px; border-radius:2px;
+    background:var(--red); color:#fff; text-decoration:none;
+    font-weight:700; letter-spacing:.5px; font-family:'Trebuchet MS',sans-serif;
+    border:2px solid var(--red); transition:.2s;
+  }
+  .btn:hover{background:transparent; color:var(--red);}
+  .btn-outline{background:transparent; border:2px solid var(--cream); color:var(--cream); margin-left:12px;}
+  .btn-outline:hover{background:var(--cream); color:var(--teal-dark);}
+
+  section{padding:90px 24px;}
+  .wrap{max-width:1050px; margin:0 auto;}
+  .kicker{text-align:center; letter-spacing:3px; text-transform:uppercase; color:var(--red-dark); font-size:.8rem; font-weight:700;}
+  .sect-title{text-align:center; font-size:2.2rem; margin:8px 0 18px; color:var(--teal-dark);}
+  .sect-sub{text-align:center; max-width:620px; margin:0 auto 50px; color:#5a5348;}
+
+  /* ABOUT */
+  .about{background:var(--cream-2);}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .about-grid img{width:100%; border-radius:4px; box-shadow:0 18px 40px rgba(14,61,60,.25);}
+  .about-text h2{font-size:2rem; color:var(--teal-dark); margin-bottom:16px;}
+  .about-text p{margin-bottom:14px; color:#4a4438;}
+  .badge-row{display:flex; gap:24px; margin-top:24px; flex-wrap:wrap;}
+  .badge strong{display:block; font-size:1.6rem; color:var(--red);}
+  .badge span{font-size:.85rem; color:#6b6455;}
+
+  /* MENU ACCORDION */
+  .menu-hint{text-align:center; color:#8a8272; font-size:.85rem; font-style:italic; margin-bottom:30px;}
+  .accordion{display:flex; flex-direction:column; gap:12px;}
+  .acc-item{border:1px solid #e4d7b7; border-radius:6px; background:#fff; overflow:hidden;}
+  .acc-head{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:18px 22px; cursor:pointer; background:var(--cream-2);
+    font-family:'Trebuchet MS',sans-serif;
+  }
+  .acc-head h3{color:var(--teal-dark); font-size:1.15rem;}
+  .acc-head .acc-meta{color:#8a8272; font-size:.8rem; font-weight:600;}
+  .acc-icon{
+    width:26px; height:26px; border-radius:50%; background:var(--red); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;
+    transition:transform .25s ease;
+  }
+  .acc-item.open .acc-icon{transform:rotate(45deg);}
+  .acc-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .acc-body-inner{padding:6px 22px 22px;}
+  .dish{
+    display:flex; justify-content:space-between; gap:18px; padding:12px 0;
+    border-bottom:1px dashed #e4d7b7;
+  }
+  .dish:last-child{border-bottom:none;}
+  .dish-name{font-weight:700; color:var(--ink); font-size:1rem;}
+  .dish-desc{color:#7a7264; font-size:.87rem; margin-top:3px;}
+  .dish-price{white-space:nowrap; font-weight:700; color:var(--red-dark); font-family:'Trebuchet MS',sans-serif; padding-left:10px;}
+  .menu-note{text-align:center; margin-top:36px; color:#8a8272; font-size:.88rem; font-style:italic;}
+
+  /* GALLERY strip */
+  .strip{display:grid; grid-template-columns:repeat(4,1fr); gap:4px;}
+  .strip img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.05);}
+
+  /* BOOKING */
+  .booking{background:linear-gradient(160deg, var(--teal-dark), var(--teal)); color:var(--cream);}
+  .booking .sect-title{color:var(--cream);}
+  .booking .kicker{color:var(--gold);}
+  .booking .sect-sub{color:var(--cream-2);}
+  .book-wrap{display:grid; grid-template-columns:1fr 1.2fr; gap:50px; align-items:start;}
+  .book-info h3{margin-bottom:10px; color:var(--gold);}
+  .book-info p{color:var(--cream-2); margin-bottom:22px; font-size:.95rem;}
+  .info-line{display:flex; gap:12px; margin-bottom:16px; align-items:flex-start;}
+  .info-line .ic{font-size:1.2rem;}
+  .info-line div strong{display:block;}
+  .info-line div span{color:var(--cream-2); font-size:.9rem;}
+
+  form.reserve{background:var(--cream); color:var(--ink); padding:34px; border-radius:6px; box-shadow:0 20px 50px rgba(0,0,0,.25);}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-bottom:6px; color:var(--teal-dark);}
+  .field input, .field select, .field textarea{
+    width:100%; padding:11px 12px; border:1px solid #d8cba9; border-radius:4px;
+    font-family:inherit; font-size:.95rem; background:#fff;
+  }
+  .field input:focus, .field select:focus{outline:2px solid var(--red); border-color:var(--red);}
+  form.reserve button{
+    width:100%; padding:14px; background:var(--red); color:#fff; border:none;
+    border-radius:4px; font-weight:700; font-size:1rem; cursor:pointer; letter-spacing:.4px;
+    font-family:'Trebuchet MS',sans-serif; transition:.2s;
+  }
+  form.reserve button:hover{background:var(--red-dark);}
+  .confirm-msg{display:none; margin-top:16px; padding:14px; background:#e7f3ea; border:1px solid #b7dcc0; color:#245431; border-radius:4px; font-size:.9rem;}
+
+  /* FOOTER */
+  footer{background:#0a2b2a; color:var(--cream-2); padding:50px 24px 20px; text-align:center;}
+  footer h3{color:var(--cream); margin-bottom:8px;}
+  footer p{color:#a9baa9; font-size:.9rem; max-width:420px; margin:0 auto 20px;}
+  .foot-links{display:flex; justify-content:center; gap:22px; margin-bottom:24px; flex-wrap:wrap;}
+  .foot-links a{color:var(--cream-2); text-decoration:none; font-size:.9rem;}
+  .foot-links a:hover{color:var(--red);}
+  .demo-note{border-top:1px solid rgba(255,255,255,.1); padding-top:18px; margin-top:10px; font-size:.75rem; color:#7f9088;}
+
+  @media(max-width:820px){
+    .about-grid, .book-wrap{grid-template-columns:1fr;}
+    .strip{grid-template-columns:repeat(2,1fr);}
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0; background:var(--teal-dark);
+      flex-direction:column; padding:20px; gap:16px; display:none;
+    }
+    .nav-links.open{display:flex;}
+    .lang-switch{margin-left:0; margin-top:8px;}
+    .nav-toggle{display:flex;}
+    .hero h1{font-size:2.1rem;}
+    .form-row{grid-template-columns:1fr;}
+    .dish{flex-direction:column; gap:4px;}
+    .dish-price{padding-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="nav-brand">MIX <span>FOOD</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio" data-i18n="nav.inicio">Inicio</a></li>
+      <li><a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
+      <li><a href="#carta" data-i18n="nav.carta">Carta</a></li>
+      <li><a href="#reservas" data-i18n="nav.reservas">Reservas</a></li>
+      <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      <li class="lang-switch">
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ca">CA</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section id="inicio" class="hero">
+  <div class="hero-inner">
+    <small data-i18n="hero.kicker">Horta-Guinardó · Barcelona</small>
+    <h1 data-i18n="hero.title">Del Caribe al Mediterráneo, en el mismo plato</h1>
+    <p data-i18n="hero.desc">Chuletón madurado 30 días, paella para dos y camarones en salsa de coco, en un rincón de Varsòvia donde el ron sabe a casa.</p>
+    <a href="#reservas" class="btn" data-i18n="hero.btn1">Reservar mesa</a>
+    <a href="#carta" class="btn btn-outline" data-i18n="hero.btn2">Ver la carta</a>
+  </div>
+</section>
+
+<section id="nosotros" class="about">
+  <div class="wrap about-grid">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" alt="Sala de Mix Food Restaurant">
+    <div class="about-text">
+      <span class="kicker" data-i18n="about.kicker">Nuestra historia</span>
+      <h2 data-i18n="about.title">Dos cocinas, una misma mesa</h2>
+      <p data-i18n="about.p1">Mix Food nació de una pregunta sencilla: ¿por qué elegir entre el Caribe y el Mediterráneo si los dos saben tan bien juntos? Aquí la brasa se encuentra con el azafrán, y el mismo plato puede recordarte a Santo Domingo y a Barcelona a la vez.</p>
+      <p data-i18n="about.p2">Somos un local de barrio, pequeño y sin pretensiones, con menú diario de lunes a viernes y una carta de licores que da para explorar varias visitas. Aquí se viene a comer bien y a quedarse un rato.</p>
+      <div class="badge-row">
+        <div class="badge"><strong>30</strong><span data-i18n="about.b1">días de maduración del chuletón</span></div>
+        <div class="badge"><strong>7</strong><span data-i18n="about.b2">días abierto, desde las 12h</span></div>
+        <div class="badge"><strong>25+</strong><span data-i18n="about.b3">referencias en licores premium</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="carta">
+  <div class="wrap">
+    <span class="kicker" data-i18n="menu.kicker">La carta completa</span>
+    <h2 class="sect-title" data-i18n="menu.title">Menú</h2>
+    <p class="sect-sub" data-i18n="menu.sub">Directamente de nuestra carta impresa — con precios reales, sin sorpresas en la mesa.</p>
+    <p class="menu-hint" data-i18n="menu.hint">Toca una categoría para desplegarla</p>
+    <div class="accordion" id="accordion"></div>
+    <p class="menu-note" data-i18n="menu.note">Carta y precios sujetos a cambios de temporada — el equipo en sala confirma siempre la versión vigente.</p>
+  </div>
+</section>
+
+<div class="strip">
+  <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=500&q=70" alt="Paella">
+  <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=500&q=70" alt="Carne a la brasa">
+  <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=70" alt="Cóctel">
+  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=70" alt="Ambiente del restaurante">
+</div>
+
+<section id="reservas" class="booking">
+  <div class="wrap book-wrap">
+    <div class="book-info">
+      <span class="kicker" data-i18n="book.kicker">Te guardamos sitio</span>
+      <h3 data-i18n="book.title">Reserva tu mesa</h3>
+      <p data-i18n="book.desc">Rellena el formulario y te confirmamos por WhatsApp o llamada. Para grupos grandes, mejor llámanos directamente.</p>
+      <div class="info-line">
+        <span class="ic">📍</span>
+        <div><strong data-i18n="book.addrLabel">Dirección</strong><span>Carrer de Varsòvia, 26, Horta-Guinardó, 08041 Barcelona</span></div>
+      </div>
+      <div class="info-line">
+        <span class="ic">📞</span>
+        <div><strong data-i18n="book.phoneLabel">Teléfono / WhatsApp</strong><span>+34 600 04 55 17</span></div>
+      </div>
+      <div class="info-line">
+        <span class="ic">🕐</span>
+        <div><strong data-i18n="book.hoursLabel">Horario</strong><span data-i18n="book.hours">Todos los días, desde las 12:00h</span></div>
+      </div>
+    </div>
+
+    <form class="reserve" id="reserveForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="name" data-i18n="form.name">Nombre</label>
+          <input type="text" id="name" data-i18n-ph="form.namePh" placeholder="Tu nombre" required>
+        </div>
+        <div class="field">
+          <label for="phone" data-i18n="form.phone">Teléfono</label>
+          <input type="tel" id="phone" placeholder="600 000 000" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="date" data-i18n="form.date">Fecha</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="field">
+          <label for="time" data-i18n="form.time">Hora</label>
+          <select id="time" required>
+            <option value="" data-i18n="form.timeSelect">Elige una hora</option>
+            <option>12:00</option><option>12:30</option>
+            <option>13:00</option><option>13:30</option>
+            <option>14:00</option><option>14:30</option>
+            <option>20:00</option><option>20:30</option>
+            <option>21:00</option><option>21:30</option>
+            <option>22:00</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="guests" data-i18n="form.guests">Comensales</label>
+          <select id="guests">
+            <option data-i18n="form.g1">1 persona</option>
+            <option selected data-i18n="form.g2">2 personas</option>
+            <option data-i18n="form.g3">3 personas</option>
+            <option data-i18n="form.g4">4 personas</option>
+            <option data-i18n="form.g5">5 personas</option>
+            <option data-i18n="form.g6">6+ personas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="notes" data-i18n="form.notes">Nota (opcional)</label>
+          <input type="text" id="notes" data-i18n-ph="form.notesPh" placeholder="Alergias, celebración...">
+        </div>
+      </div>
+      <button type="submit" data-i18n="form.submit">Confirmar reserva</button>
+      <div class="confirm-msg" id="confirmMsg"></div>
+    </form>
+  </div>
+</section>
+
+<footer id="contacto">
+  <h3>MIX FOOD RESTAURANT</h3>
+  <p>Carrer de Varsòvia, 26 · Horta-Guinardó · 08041 Barcelona</p>
+  <div class="foot-links">
+    <a href="tel:+34600045517">📞 +34 600 04 55 17</a>
+    <a href="https://www.instagram.com/mixfoodrestaurant/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/34600045517" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="demo-note" data-i18n="footer.demo">Esta es una versión de demostración de la web, creada como propuesta de diseño y sin conexión a un sistema de reservas real.</div>
+</footer>
+
+<script>
+/* ---------- MENU DATA (from the restaurant's own printed menu) ---------- */
+const menu = [
+  {
+    id:"picar",
+    name:{es:"Para Picar y Compartir", ca:"Per Picar i Compartir", en:"Small Plates to Share"},
+    items:[
+      {name:{es:"Yuca frita",ca:"Iuca fregida",en:"Fried yuca"}, desc:{es:"Con salsa de la casa",ca:"Amb salsa de la casa",en:"With house dipping sauce"}, price:"6,50 €"},
+      {name:{es:"Tostones",ca:"Tostons",en:"Tostones (fried plantain)"}, desc:{es:"Plátano verde frito, receta caribeña",ca:"Plàtan verd fregit, recepta caribenya",en:"Twice-fried green plantain"}, price:"6 €"},
+      {name:{es:"Pulpito a la plancha",ca:"Pop a la planxa",en:"Grilled baby octopus"}, desc:{es:"Con ajo y perejil",ca:"Amb all i julivert",en:"With garlic and parsley"}, price:"8,95 €"},
+      {name:{es:"Tequeños",ca:"Tequeños",en:"Tequeños (cheese sticks)"}, desc:{es:"Unidad",ca:"Unitat",en:"Per piece"}, price:"1 €"},
+      {name:{es:"Bravas",ca:"Patates braves",en:"Patatas bravas"}, desc:{es:"La clásica catalana",ca:"La clàssica catalana",en:"The classic Catalan-style"}, price:"5 €"},
+      {name:{es:"Calamar a la romana",ca:"Calamars a la romana",en:"Fried squid rings"}, desc:{es:"",ca:"",en:""}, price:"8,95 €"},
+      {name:{es:"Hamburguesa Mix",ca:"Hamburguesa Mix",en:"Mix Burger"}, desc:{es:"Incluye patatas",ca:"Inclou patates",en:"Served with fries"}, price:"10,95 €"},
+      {name:{es:"Picapollo",ca:"Picapollo",en:"Picapollo (fried chicken bites)"}, desc:{es:"Pequeña 13 € · Mediana 17 €",ca:"Petita 13 € · Mitjana 17 €",en:"Small 13 € · Medium 17 €"}, price:""}
+    ]
+  },
+  {
+    id:"mar",
+    name:{es:"Sabor a Mar y Tradición", ca:"Sabor a Mar i Tradició", en:"Flavours of the Sea & Tradition"},
+    items:[
+      {name:{es:"Camarones en salsa de coco",ca:"Gambes en salsa de coco",en:"Prawns in coconut sauce"}, desc:{es:"Salteados al grill, leche de coco y especias. Con patatas o patacones",ca:"Saltats a la planxa, llet de coco i espècies. Amb patates o patacons",en:"Grilled and tossed in coconut milk and spices. Served with fries or fried plantain"}, price:"16 €"},
+      {name:{es:"Dorada frita",ca:"Orada fregida",en:"Fried sea bream"}, desc:{es:"Especiada, con yuca o tostones y salsa criolla",ca:"Especiada, amb iuca o tostons i salsa criolla",en:"Spiced, with yuca or tostones and criollo sauce"}, price:"16 €"},
+      {name:{es:"Paella para dos",ca:"Paella per a dos",en:"Paella for two"}, desc:{es:"La clásica de mariscos, al estilo Mix Food",ca:"La clàssica de marisc, a l'estil Mix Food",en:"Classic seafood paella, Mix Food style"}, price:"24,90 €"},
+      {name:{es:"Pasta Alfredo",ca:"Pasta Alfredo",en:"Pasta Alfredo"}, desc:{es:"Crema de nata, champiñones y pechuga de pollo",ca:"Crema de nata, xampinyons i pit de pollastre",en:"Creamy sauce with mushrooms and chicken breast"}, price:"14,90 €"},
+      {name:{es:"Pasta de camarones",ca:"Pasta de gambes",en:"Prawn pasta"}, desc:{es:"Camarones a la brasa en salsa de mariscos",ca:"Gambes a la brasa en salsa de marisc",en:"Grilled prawns in seafood sauce"}, price:"16,50 €"}
+    ]
+  },
+  {
+    id:"brasa",
+    name:{es:"Brasa Caribeña", ca:"Brasa Caribenya", en:"Caribbean Grill"},
+    items:[
+      {name:{es:"Chuletón",ca:"Txuletón",en:"Chuletón (aged rib steak)"}, desc:{es:"500g madurado 30 días, chimichurri y sal de escama",ca:"500g madurat 30 dies, chimichurri i sal d'escata",en:"500g, aged 30 days, chimichurri and flake salt"}, price:"29,90 €"},
+      {name:{es:"Entraña",ca:"Entranya",en:"Skirt steak"}, desc:{es:"300g con patatas, chimichurri y sal de escama",ca:"300g amb patates, chimichurri i sal d'escata",en:"300g with potatoes, chimichurri and flake salt"}, price:"14,90 €"},
+      {name:{es:"Pechuga a la plancha",ca:"Pit a la planxa",en:"Grilled chicken breast"}, desc:{es:"Con patatas fritas o al horno",ca:"Amb patates fregides o al forn",en:"With fries or baked potatoes"}, price:"11,90 €"},
+      {name:{es:"Fritada",ca:"Fritada",en:"Fritada (mixed fried chicken)"}, desc:{es:"Pequeña 13 € · Mediana 17 € · Grande 22 €",ca:"Petita 13 € · Mitjana 17 € · Gran 22 €",en:"Small 13 € · Medium 17 € · Large 22 €"}, price:""},
+      {name:{es:"Plato dominicano",ca:"Plat dominicà",en:"Dominican plate"}, desc:{es:"",ca:"",en:""}, price:"13,90 €"},
+      {name:{es:"Menú diario",ca:"Menú diari",en:"Daily menu"}, desc:{es:"Lunes a viernes, bebida + postre o café",ca:"Dilluns a divendres, beguda + postre o cafè",en:"Mon–Fri, drink + dessert or coffee included"}, price:"14,95 €"}
+    ]
+  },
+  {
+    id:"cocteles",
+    name:{es:"Cócteles", ca:"Còctels", en:"Cocktails"},
+    items:[
+      {name:{es:"Mojito",ca:"Mojito",en:"Mojito"}, desc:{es:"",ca:"",en:""}, price:"8 €"},
+      {name:{es:"Caipiriña",ca:"Caipirinya",en:"Caipirinha"}, desc:{es:"",ca:"",en:""}, price:"8 €"},
+      {name:{es:"Caipiroska",ca:"Caipiroska",en:"Caipiroska"}, desc:{es:"",ca:"",en:""}, price:"8 €"},
+      {name:{es:"Daiquirí",ca:"Daiquiri",en:"Daiquiri"}, desc:{es:"",ca:"",en:""}, price:"8 €"},
+      {name:{es:"Aperol spritz",ca:"Aperol spritz",en:"Aperol spritz"}, desc:{es:"",ca:"",en:""}, price:"6,50 €"}
+    ]
+  },
+  {
+    id:"vinos",
+    name:{es:"Vinos y Bebidas", ca:"Vins i Begudes", en:"Wine & Drinks"},
+    items:[
+      {name:{es:"Sangría de vino",ca:"Sangria de vi",en:"House sangria (jug)"}, desc:{es:"Jarra para compartir",ca:"Gerra per compartir",en:"Sharing jug"}, price:"14,95 €"},
+      {name:{es:"Copa de sangría",ca:"Copa de sangria",en:"Glass of sangria"}, desc:{es:"",ca:"",en:""}, price:"4 €"},
+      {name:{es:"Vinos de la casa",ca:"Vins de la casa",en:"House wine"}, desc:{es:"Copa",ca:"Copa",en:"By the glass"}, price:"4,50 €"},
+      {name:{es:"Tinto de verano",ca:"Vi negre d'estiu",en:"Tinto de verano"}, desc:{es:"",ca:"",en:""}, price:"3,50 €"},
+      {name:{es:"Caña / Jarra Estrella",ca:"Canya / Gerra Estrella",en:"Draft beer / jug"}, desc:{es:"",ca:"",en:""}, price:"2,20 € / 3,50 €"},
+      {name:{es:"Refrescos y agua",ca:"Refrescos i aigua",en:"Soft drinks & water"}, desc:{es:"Coca-Cola, Fanta, Aquarius, agua con o sin gas",ca:"Coca-Cola, Fanta, Aquarius, aigua amb o sense gas",en:"Coca-Cola, Fanta, Aquarius, still or sparkling water"}, price:"desde 1,50 €"},
+      {name:{es:"Licores premium",ca:"Licors premium",en:"Premium spirits"}, desc:{es:"Más de 25 referencias — whisky, ron, tequila y ginebra. Carta completa en sala",ca:"Més de 25 referències — whisky, rom, tequila i ginebra. Carta completa a sala",en:"25+ labels — whisky, rum, tequila and gin. Full list available in-house"}, price:""}
+    ]
+  },
+  {
+    id:"postres",
+    name:{es:"Cafés y Postres", ca:"Cafès i Postres", en:"Coffee & Desserts"},
+    items:[
+      {name:{es:"Café solo / cortado / con leche",ca:"Cafè sol / tallat / amb llet",en:"Espresso / cortado / white coffee"}, desc:{es:"",ca:"",en:""}, price:"desde 1,30 €"},
+      {name:{es:"Carajillo",ca:"Carajillo",en:"Carajillo (coffee with liquor)"}, desc:{es:"Coñac o whisky",ca:"Conyac o whisky",en:"Brandy or whisky"}, price:"3,50 €"},
+      {name:{es:"Tarta de leches",ca:"Pastís de llets",en:"Tres leches cake"}, desc:{es:"",ca:"",en:""}, price:"5,50 €"},
+      {name:{es:"Tarta de queso",ca:"Pastís de formatge",en:"Cheesecake"}, desc:{es:"",ca:"",en:""}, price:"3,50 €"},
+      {name:{es:"Flan / Pudin / Fruta de temporada",ca:"Flam / Pudin / Fruita de temporada",en:"Flan / Pudding / Seasonal fruit"}, desc:{es:"",ca:"",en:""}, price:"3 €"},
+      {name:{es:"Recomendación del chef",ca:"Recomanació del xef",en:"Chef's recommendation"}, desc:{es:"Pregunta qué hay hoy",ca:"Pregunta què hi ha avui",en:"Ask what's on today"}, price:"3 €"}
+    ]
+  }
+];
+
+/* ---------- UI TRANSLATIONS ---------- */
+const i18n = {
+  es:{
+    "nav.inicio":"Inicio","nav.nosotros":"Nosotros","nav.carta":"Carta","nav.reservas":"Reservas","nav.contacto":"Contacto",
+    "hero.kicker":"Horta-Guinardó · Barcelona",
+    "hero.title":"Del Caribe al Mediterráneo, en el mismo plato",
+    "hero.desc":"Chuletón madurado 30 días, paella para dos y camarones en salsa de coco, en un rincón de Varsòvia donde el ron sabe a casa.",
+    "hero.btn1":"Reservar mesa","hero.btn2":"Ver la carta",
+    "about.kicker":"Nuestra historia","about.title":"Dos cocinas, una misma mesa",
+    "about.p1":"Mix Food nació de una pregunta sencilla: ¿por qué elegir entre el Caribe y el Mediterráneo si los dos saben tan bien juntos? Aquí la brasa se encuentra con el azafrán, y el mismo plato puede recordarte a Santo Domingo y a Barcelona a la vez.",
+    "about.p2":"Somos un local de barrio, pequeño y sin pretensiones, con menú diario de lunes a viernes y una carta de licores que da para explorar varias visitas. Aquí se viene a comer bien y a quedarse un rato.",
+    "about.b1":"días de maduración del chuletón","about.b2":"días abierto, desde las 12h","about.b3":"referencias en licores premium",
+    "menu.kicker":"La carta completa","menu.title":"Menú","menu.sub":"Directamente de nuestra carta impresa — con precios reales, sin sorpresas en la mesa.",
+    "menu.hint":"Toca una categoría para desplegarla",
+    "menu.note":"Carta y precios sujetos a cambios de temporada — el equipo en sala confirma siempre la versión vigente.",
+    "book.kicker":"Te guardamos sitio","book.title":"Reserva tu mesa",
+    "book.desc":"Rellena el formulario y te confirmamos por WhatsApp o llamada. Para grupos grandes, mejor llámanos directamente.",
+    "book.addrLabel":"Dirección","book.phoneLabel":"Teléfono / WhatsApp","book.hoursLabel":"Horario","book.hours":"Todos los días, desde las 12:00h",
+    "form.name":"Nombre","form.namePh":"Tu nombre","form.phone":"Teléfono","form.date":"Fecha","form.time":"Hora","form.timeSelect":"Elige una hora",
+    "form.guests":"Comensales","form.g1":"1 persona","form.g2":"2 personas","form.g3":"3 personas","form.g4":"4 personas","form.g5":"5 personas","form.g6":"6+ personas",
+    "form.notes":"Nota (opcional)","form.notesPh":"Alergias, celebración...","form.submit":"Confirmar reserva",
+    "form.confirm":(n,d,t)=>`Gracias, ${n}. Reserva de prueba registrada para el ${d} a las ${t}. (Demo: en la versión final esto se enviaría por WhatsApp/email al restaurante.)`,
+    "footer.demo":"Esta es una versión de demostración de la web, creada como propuesta de diseño y sin conexión a un sistema de reservas real."
+  },
+  ca:{
+    "nav.inicio":"Inici","nav.nosotros":"Nosaltres","nav.carta":"Carta","nav.reservas":"Reserves","nav.contacto":"Contacte",
+    "hero.kicker":"Horta-Guinardó · Barcelona",
+    "hero.title":"Del Carib a la Mediterrània, en el mateix plat",
+    "hero.desc":"Txuletón madurat 30 dies, paella per a dos i gambes en salsa de coco, en un racó de Varsòvia on el rom sap a casa.",
+    "hero.btn1":"Reservar taula","hero.btn2":"Veure la carta",
+    "about.kicker":"La nostra història","about.title":"Dues cuines, una mateixa taula",
+    "about.p1":"Mix Food va néixer d'una pregunta senzilla: per què triar entre el Carib i la Mediterrània si tots dos saben tan bé junts? Aquí la brasa es troba amb el safrà, i el mateix plat et pot recordar Santo Domingo i Barcelona alhora.",
+    "about.p2":"Som un local de barri, petit i sense pretensions, amb menú diari de dilluns a divendres i una carta de licors que dona per explorar diverses visites. Aquí es ve a menjar bé i a quedar-se una estona.",
+    "about.b1":"dies de maduració del txuletón","about.b2":"dies obert, des de les 12h","about.b3":"referències en licors premium",
+    "menu.kicker":"La carta completa","menu.title":"Menú","menu.sub":"Directament de la nostra carta impresa — amb preus reals, sense sorpreses a taula.",
+    "menu.hint":"Toca una categoria per desplegar-la",
+    "menu.note":"Carta i preus subjectes a canvis de temporada — l'equip a sala confirma sempre la versió vigent.",
+    "book.kicker":"Et guardem lloc","book.title":"Reserva la teva taula",
+    "book.desc":"Omple el formulari i et confirmem per WhatsApp o trucada. Per a grups grans, millor truca'ns directament.",
+    "book.addrLabel":"Adreça","book.phoneLabel":"Telèfon / WhatsApp","book.hoursLabel":"Horari","book.hours":"Tots els dies, des de les 12:00h",
+    "form.name":"Nom","form.namePh":"El teu nom","form.phone":"Telèfon","form.date":"Data","form.time":"Hora","form.timeSelect":"Tria una hora",
+    "form.guests":"Comensals","form.g1":"1 persona","form.g2":"2 persones","form.g3":"3 persones","form.g4":"4 persones","form.g5":"5 persones","form.g6":"6+ persones",
+    "form.notes":"Nota (opcional)","form.notesPh":"Al·lèrgies, celebració...","form.submit":"Confirmar reserva",
+    "form.confirm":(n,d,t)=>`Gràcies, ${n}. Reserva de prova registrada per al ${d} a les ${t}. (Demo: a la versió final això s'enviaria per WhatsApp/email al restaurant.)`,
+    "footer.demo":"Aquesta és una versió de demostració de la web, creada com a proposta de disseny i sense connexió a un sistema de reserves real."
+  },
+  en:{
+    "nav.inicio":"Home","nav.nosotros":"About","nav.carta":"Menu","nav.reservas":"Booking","nav.contacto":"Contact",
+    "hero.kicker":"Horta-Guinardó · Barcelona",
+    "hero.title":"From the Caribbean to the Mediterranean, on the same plate",
+    "hero.desc":"30-day aged rib steak, paella for two, and prawns in coconut sauce, in a corner of Varsòvia where the rum tastes like home.",
+    "hero.btn1":"Book a table","hero.btn2":"See the menu",
+    "about.kicker":"Our story","about.title":"Two cuisines, one table",
+    "about.p1":"Mix Food started with a simple question: why choose between the Caribbean and the Mediterranean when both taste so good together? Here the grill meets the saffron, and the same dish can remind you of Santo Domingo and Barcelona at once.",
+    "about.p2":"We're a small, unpretentious neighbourhood spot, with a daily menu Monday to Friday and a spirits list that's worth a few visits to get through. This is a place to eat well and stay a while.",
+    "about.b1":"days the rib steak is aged","about.b2":"days a week, open from noon","about.b3":"premium spirits on the list",
+    "menu.kicker":"The full menu","menu.title":"Menu","menu.sub":"Straight from our printed menu — real prices, no surprises at the table.",
+    "menu.hint":"Tap a category to open it",
+    "menu.note":"Menu and prices may change by season — the team on the floor always confirms the current version.",
+    "book.kicker":"We'll save you a seat","book.title":"Book your table",
+    "book.desc":"Fill in the form and we'll confirm by WhatsApp or call. For larger groups, it's best to call us directly.",
+    "book.addrLabel":"Address","book.phoneLabel":"Phone / WhatsApp","book.hoursLabel":"Hours","book.hours":"Open every day, from 12:00pm",
+    "form.name":"Name","form.namePh":"Your name","form.phone":"Phone","form.date":"Date","form.time":"Time","form.timeSelect":"Choose a time",
+    "form.guests":"Guests","form.g1":"1 person","form.g2":"2 people","form.g3":"3 people","form.g4":"4 people","form.g5":"5 people","form.g6":"6+ people",
+    "form.notes":"Note (optional)","form.notesPh":"Allergies, celebration...","form.submit":"Confirm booking",
+    "form.confirm":(n,d,t)=>`Thanks, ${n}. Test booking recorded for ${d} at ${t}. (Demo: in the final version this would be sent by WhatsApp/email to the restaurant.)`,
+    "footer.demo":"This is a demo version of the website, built as a design proposal and not connected to a real booking system."
+  }
+};
+
+let currentLang = "es";
+
+function renderMenu(){
+  const acc = document.getElementById('accordion');
+  acc.innerHTML = "";
+  menu.forEach((cat, idx) => {
+    const item = document.createElement('div');
+    item.className = 'acc-item';
+    item.innerHTML = `
+      <div class="acc-head" data-idx="${idx}">
+        <h3>${cat.name[currentLang]}</h3>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <span class="acc-meta">${cat.items.length} ${currentLang==='es'?'platos':currentLang==='ca'?'plats':'items'}</span>
+          <span class="acc-icon">+</span>
+        </div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        ${cat.items.map(d => `
+          <div class="dish">
+            <div>
+              <div class="dish-name">${d.name[currentLang]}</div>
+              ${d.desc[currentLang] ? `<div class="dish-desc">${d.desc[currentLang]}</div>` : ""}
+            </div>
+            ${d.price ? `<div class="dish-price">${d.price}</div>` : ""}
+          </div>`).join("")}
+      </div></div>
+    `;
+    acc.appendChild(item);
+  });
+
+  acc.querySelectorAll('.acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const parent = head.parentElement;
+      const body = parent.querySelector('.acc-body');
+      const wasOpen = parent.classList.contains('open');
+      acc.querySelectorAll('.acc-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.acc-body').style.maxHeight = null;
+      });
+      if(!wasOpen){
+        parent.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
+    });
+  });
+}
+
+function applyLang(lang){
+  currentLang = lang;
+  document.getElementById('htmlRoot').lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if(i18n[lang][key]) el.placeholder = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  renderMenu();
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+// mobile nav
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// booking form (demo only)
+const form = document.getElementById('reserveForm');
+const confirmMsg = document.getElementById('confirmMsg');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  confirmMsg.style.display = 'block';
+  confirmMsg.textContent = i18n[currentLang]["form.confirm"](name, date, time);
+  form.reset();
+});
+
+applyLang('es');
+</script>
+
+</body>
+</html>
