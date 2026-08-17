@@ -34,21 +34,22 @@
   nav{
     max-width:1150px; margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
-    padding:16px 24px; gap:20px;
+    padding:14px 16px; gap:12px;
   }
   .nav-brand{color:var(--cream); font-size:1.4rem; font-weight:700; letter-spacing:.5px; display:flex; align-items:center; gap:8px; white-space:nowrap;}
   .nav-brand span{color:var(--red);}
+  .nav-right{display:flex; align-items:center; gap:16px;}
   .nav-links{display:flex; gap:26px; list-style:none; align-items:center;}
   .nav-links a{color:var(--cream-2); text-decoration:none; font-size:.95rem; font-weight:600; letter-spacing:.3px; transition:color .2s;}
   .nav-links a:hover{color:var(--red);}
-  .lang-switch{display:flex; gap:4px; margin-left:6px;}
+  .lang-switch{display:flex; gap:4px; flex-shrink:0;}
   .lang-btn{
     background:none; border:1px solid rgba(250,242,228,.35); color:var(--cream-2);
-    font-size:.72rem; font-weight:700; padding:4px 8px; border-radius:3px; cursor:pointer;
-    font-family:'Trebuchet MS',sans-serif; letter-spacing:.5px;
+    font-size:.74rem; font-weight:700; padding:6px 9px; border-radius:3px; cursor:pointer;
+    font-family:'Trebuchet MS',sans-serif; letter-spacing:.5px; min-width:36px;
   }
   .lang-btn.active, .lang-btn:hover{background:var(--red); border-color:var(--red); color:#fff;}
-  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; flex-shrink:0;}
   .nav-toggle span{width:24px; height:2px; background:var(--cream);}
 
   /* HERO */
@@ -170,15 +171,38 @@
     .strip{grid-template-columns:repeat(2,1fr);}
     .nav-links{
       position:absolute; top:100%; left:0; right:0; background:var(--teal-dark);
-      flex-direction:column; padding:20px; gap:16px; display:none;
+      flex-direction:column; padding:20px; gap:18px; display:none;
+      box-shadow:0 10px 20px rgba(0,0,0,.2);
     }
     .nav-links.open{display:flex;}
-    .lang-switch{margin-left:0; margin-top:8px;}
+    .nav-links a{display:block; padding:6px 0; font-size:1.05rem;}
     .nav-toggle{display:flex;}
-    .hero h1{font-size:2.1rem;}
+    section{padding:60px 18px;}
+    .hero{padding:110px 18px 50px;}
+    .hero h1{font-size:2rem;}
+    .hero p{font-size:1rem;}
+    .btn{width:100%; margin:0 0 12px; text-align:center;}
+    .btn-outline{margin-left:0;}
+    .sect-title{font-size:1.7rem;}
+    .about-grid{gap:26px;}
+    .badge-row{gap:18px 26px;}
     .form-row{grid-template-columns:1fr;}
     .dish{flex-direction:column; gap:4px;}
     .dish-price{padding-left:0;}
+    .acc-head{padding:16px;}
+    .acc-head h3{font-size:1rem;}
+    .acc-meta{display:none;}
+    form.reserve{padding:22px;}
+    .foot-links{gap:16px;}
+  }
+
+  @media(max-width:480px){
+    .nav-brand{font-size:1.15rem;}
+    .lang-btn{padding:5px 7px; font-size:.68rem; min-width:30px;}
+    .hero h1{font-size:1.65rem;}
+    .strip{grid-template-columns:repeat(2,1fr);}
+    .strip img{height:150px;}
+    .badge strong{font-size:1.35rem;}
   }
 </style>
 </head>
@@ -193,13 +217,15 @@
       <li><a href="#carta" data-i18n="nav.carta">Carta</a></li>
       <li><a href="#reservas" data-i18n="nav.reservas">Reservas</a></li>
       <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
-      <li class="lang-switch">
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
         <button class="lang-btn" data-lang="es">ES</button>
         <button class="lang-btn" data-lang="ca">CA</button>
         <button class="lang-btn" data-lang="en">EN</button>
-      </li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
   </nav>
 </header>
 
